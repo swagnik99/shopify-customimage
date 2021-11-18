@@ -1,0 +1,123 @@
+<style>
+  .section-bck{
+    background: {{section.settings.rev_background}};
+  }
+  .rev_wrap{
+    display: flex;
+    padding: 40px 40px;
+    grid-gap: 30px;
+    
+  }
+  .rev_block{
+    width:50%;
+    height:300px;
+    background: #fff;
+    display: flex;
+    align-items:center;
+  }
+  .rev_wrap .testimonials-slider__text{
+    text-align: center;
+  }
+  .rev_block .testimonials-slider__text{
+    padding: 30px 70px!important;
+  }
+  .index-section{
+    display: flex;
+    flex-wrap: wrap !important;
+  }
+  
+  @media screen and (max-width: 768px){
+    .rev_wrap {
+      display: flex;
+      grid-gap: 0px;
+      flex-direction: column;
+      padding:20px 20px;
+    }
+    .rev_block {
+      width: 100%;
+      height: 300px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      margin: 20px 0px;
+    }
+  }
+</style>
+
+<!-- <h1>Review</h1> -->
+<div class="index-section section-bck">
+  <div class="page-width feature-row-wrapper rev_wrap">
+    {% for block in section.blocks %}
+    	<div class="rev_block">
+          <blockquote class="testimonials-slider__text">
+            <span class="testimonial-stars">★★★★★</span>
+            <div class="rte-setting text-spacing">
+              <p>{{block.settings.rev_comments}}</p>
+            </div>
+            <cite>{{block.settings.rev_author}}</cite>
+          </blockquote>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Custom Testimonial",
+    "class": "index-section",
+    "max_blocks":2,
+    "settings": [
+					{
+                      "type": "text",
+                      "id": "section_title",
+                      "label": "Section Heading",
+                      "default": "Quick links"
+                    },
+					{
+                      "type": "color",
+                      "id": "rev_background",
+                      "label": "Section Background",
+                      "default": "#000000"
+                    }
+    ],
+    "blocks": [
+                {
+                  "type": "rev_block",
+                  "name": "Text Block",
+                  "settings":[
+                     {
+                        "type": "textarea",
+                        "id": "rev_comments",
+                        "label": "Review Comments",
+                        "default": "Add customer reviews and testimonials to showcase your store’s happy customers."
+                     },
+                     {
+                        "type": "text",
+                        "id": "rev_author",
+                        "label": "Review Author Name",
+                        "default": "Author's name"
+                     }
+                  ]
+                }
+    ],
+    "presets": [
+          {
+            "name": "Custom Testimonial",
+            "blocks": [
+              {
+              	"type": "rev_block"
+              },
+              {
+              	"type": "rev_block"
+              }
+            ]
+          }
+        ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+  
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
